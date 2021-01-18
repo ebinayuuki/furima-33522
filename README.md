@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column              | Type   | Options     |
-| ------------------- | ------ | ----------- |
-| email               | string | null: false |
-| password            | string | null: false |
-| nickname            | string | null: false |
-| first_name          | string | null: false |
-| last_name           | string | null: false |
-| first_name_katakana | string | null: false |
-| last_name_katakana  | string | null: false |
-| birthday            | date   | null: false |
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| nickname            | string | null: false               |
+| first_name          | string | null: false               |
+| last_name           | string | null: false               |
+| first_name_katakana | string | null: false               |
+| last_name_katakana  | string | null: false               |
+| birthday            | date   | null: false               |
 
 ### Association
 
@@ -21,22 +21,22 @@
 
 ## items テーブル
 
-| Column               | Type         | Options                           |
-| -------------------- | ------------ | --------------------------------- |
-| name                 | string       | null: false                       |
-| info                 | text         | null: false                       |
-| category             | integer      | null: false                       |
-| status               | integer      | null: false                       |
-| shipping_cost_burden | integer      | null: false                       |
-| shipping_prefecture  | integer      | null: false                       |
-| shipping_day         | integer      | null: false                       |
-| price                | integer      | null: false                       |
-| user                 | reference    | null: false, foreign_key: true	  |
+| Column                  | Type         | Options                        |
+| ------------------------| ------------ | ------------------------------ |
+| name                    | string       | null: false                    |
+| info                    | text         | null: false                    |
+| category_id             | integer      | null: false                    |
+| status_id               | integer      | null: false                    |
+| shipping_cost_burden_id | integer      | null: false                    |
+| shipping_prefecture_id  | integer      | null: false                    |
+| shipping_day_id         | integer      | null: false                    |
+| price                   | integer      | null: false                    |
+| user                    | reference    | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many :purchase_records
+- has_one :purchase_record
 
 
 ## purchase_records テーブル
