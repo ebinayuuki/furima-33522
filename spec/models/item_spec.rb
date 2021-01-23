@@ -81,9 +81,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price is not included in the list')
     end
     it 'priceが半角英数字であること(全角数字)' do
-       @item.price = '１１１'
-       @item.valid?
-       expect(@item.errors.full_messages).to include('Price is not included in the list')
+      @item.price = '１１１'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not included in the list')
     end
     it 'priceが半角英数字であること(半角英数字混合)' do
       @item.price = '1a1a'
