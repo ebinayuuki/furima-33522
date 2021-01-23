@@ -17,10 +17,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
   # 商品投稿時のストロングパラメータ  下記カラムの値のみ取得を許可する
   def item_params
-    params.require(:item).permit(:name, :info, :category_id, :status_id, :shipping_cost_burden_id, :prefecture_id, :shipping_day_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :info, :category_id, :status_id, :shipping_cost_burden_id, :prefecture_id,
+                                 :shipping_day_id, :price, :image).merge(user_id: current_user.id)
   end
-
-
 end

@@ -11,4 +11,4 @@ class Shipping_cost_burden < ActiveHash::Base
     { id: 9, name: 'グルメ' },
     { id: 10, name: 'その他' }
   ]
-  end
+end
