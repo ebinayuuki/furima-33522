@@ -21,6 +21,19 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.update(item_params)
+    if @item.update
+       redirect_to root_path
+    else
+       render :edit
+    end
+  end
+
   private
 
   # 商品投稿時のストロングパラメータ  下記カラムの値のみ取得を許可する
