@@ -35,6 +35,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
 
   # 商品投稿時のストロングパラメータ  下記カラムの値のみ取得を許可する
