@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe RecordAdd, type: :model do
   before do
-    sleep(1)
-    @user = User.new(id: 1)
-    @item = Item.new(id: 1)
+     sleep(1)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
     @record_add = FactoryBot.build(:record_add, user: @user[:id], item: @item[:id])
   end
 
@@ -32,7 +32,7 @@ RSpec.describe RecordAdd, type: :model do
       expect(@record_add.errors.full_messages).to include('Postal code is invalid')
     end
     it 'prefecture_idが空' do
-      @record_add.prefecture_id = '0'
+      @record_add.prefecture_id = 0
       @record_add.valid?
       expect(@record_add.errors.full_messages).to include('Prefecture must be other than 0')
     end
@@ -70,6 +70,11 @@ RSpec.describe RecordAdd, type: :model do
       @record_add.token = ''
       @record_add.valid?
       expect(@record_add.errors.full_messages).to include("Token can't be blank")
+    end
+    it 'phoneが数字のみ以外' do
+      @record_add.phone = '000aaaabbbb'
+      @record_add.valid?
+      expect(@record_add.errors.full_messages).to include("Phone is invalid")
     end
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     association :user
-
+    id                      {1}
     name                    { '新製品' }
     info                    { 'お買い得' }
     category_id             { 1 }
