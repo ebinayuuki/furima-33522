@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe RecordAdd, type: :model do
   before do
-    @record_add = FactoryBot.build(:record_add)
+    sleep(1)
+    @user = User.new(id: 1)
+    @item = Item.new(id: 1)
+    @record_add = FactoryBot.build(:record_add, user: @user[:id], item: @item[:id])
   end
 
   describe '商品購入機能' do
