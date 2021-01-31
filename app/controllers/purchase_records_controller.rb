@@ -7,10 +7,11 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create  
-  
+    
     @record_add = RecordAdd.new(purchase_records_params)
    
     if @record_add.valid?
+      pay
       @record_add.save
       
        redirect_to root_path
@@ -23,10 +24,21 @@ class PurchaseRecordsController < ApplicationController
   private
 
   def purchase_records_params
-    params.require(:record_add).permit(:postal_code, :prefecture_id, :municipality, :house_number, :building, :phone).merge(user: current_user.id, item: params[:item_id])
+    params.require(:record_add).permit(:postal_code, :prefecture_id, :municipality, :house_number, :building, :phone).merge(user: current_user.id, item: params[:item_id], token: params[:token])
   end
 
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def pay
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 自身のPAY.JPテスト秘密鍵を記述しましょう
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: purchase_records_params[:token],    # カードトークン
+        currency: 'jpy'                 # 通貨の種類（日本円）
+      )
+  end
+
+
 end
