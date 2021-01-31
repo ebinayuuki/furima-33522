@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe RecordAdd, type: :model do
   before do
-     sleep(1)
-    @user = FactoryBot.build(:user)
-    @item = FactoryBot.build(:item)
+     sleep(0.1)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
     @record_add = FactoryBot.build(:record_add, user: @user[:id], item: @item[:id])
   end
 
@@ -73,6 +73,16 @@ RSpec.describe RecordAdd, type: :model do
     end
     it 'phoneが数字のみ以外' do
       @record_add.phone = '000aaaabbbb'
+      @record_add.valid?
+      expect(@record_add.errors.full_messages).to include("Phone is invalid")
+    end
+    it 'phoneが全角数字' do
+      @record_add.phone = '０９０１１１１２２２２'
+      @record_add.valid?
+      expect(@record_add.errors.full_messages).to include("Phone is invalid")
+    end
+    it 'phoneが9桁以下' do
+      @record_add.phone = '090111222'
       @record_add.valid?
       expect(@record_add.errors.full_messages).to include("Phone is invalid")
     end
