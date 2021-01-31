@@ -64,6 +64,11 @@ context '購入が失敗する場合' do
     @record_add.valid?
     expect(@record_add.errors.full_messages).to include("Item can't be blank")
   end
+  it 'tokenが空' do
+    @record_add.token = ''
+    @record_add.valid?
+    expect(@record_add.errors.full_messages).to include("Token can't be blank")
+  end
 
   end
 end

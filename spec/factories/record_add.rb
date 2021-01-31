@@ -9,6 +9,7 @@ FactoryBot.define do
     phone {'09011110000'}
     user {1}
     item {1}
+    token {"tok_abcdefghijk00000000000000000"}
   end
   
 end
