@@ -1,5 +1,9 @@
 class PurchaseRecordsController < ApplicationController
-  before_action :set_item
+  before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :my_item_buy_to_root, only: [:index] 
+  before_action :bought_item_to_root, only: [:index] 
+
 
 
   def index
@@ -40,5 +44,15 @@ class PurchaseRecordsController < ApplicationController
       )
   end
 
+  
+    def my_item_buy_to_root
+      redirect_to root_path if current_user.id == @item.user_id
+    end
+
+    def bought_item_to_root
+      redirect_to root_path if @item.purchase_record.present?
+    end
+  
+  
 
 end
