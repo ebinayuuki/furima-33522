@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   has_one_attached :image
+  has_one :purchase_record
 
   # 商品出品アクティブハッシュのバリデーション
   with_options presence: true, numericality: { other_than: 0 } do

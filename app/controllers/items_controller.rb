@@ -35,13 +35,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if@item.destroy
+    if @item.destroy
       redirect_to root_path
     else
-      render :show 
+      render :show
     end
   end
-
 
   private
 
@@ -56,8 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def login
-    redirect_to root_path if current_user.id != @item.user_id
+    redirect_to root_path if current_user.id != @item.user_id || (current_user.id == @item.user_id) && @item.purchase_record.present? 
   end
-
 end
-
